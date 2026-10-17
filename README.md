@@ -6,6 +6,14 @@ Este projeto é um **resource pack de compatibilidade**, acompanhado de um scrip
 
 Consulte o [guia completo de uso e aplicação](GUIA-DE-USO.md) para gerar, instalar, ativar, testar e integrar o patch à distribuição do modpack.
 
+## Baixar e usar como resource pack
+
+Para jogadores: abra a [versão experimental v0.1.0-alpha.1](https://github.com/Project-Lazaru-s/lazarus-apocalypse-reanimated-compat/releases/tag/v0.1.0-alpha.1) e baixe o ZIP do patch em **Assets** (o GitHub pode trocar espaços por pontos no nome). Os arquivos **Source code** são o código deste repositório, não o resource pack.
+
+Coloque o ZIP sem extrair na pasta `resourcepacks` da instância. Em **Opções → Pacotes de recursos**, ative-o acima do Reanimated Blue e do Tissou. Não é necessário Python para usar o ZIP pronto. Para desfazer, desative o pack.
+
+O anexo da prévia é o mesmo ZIP instalado inicialmente na instância local de teste. Os modelos derivados ficam nesse anexo; os arquivos-fonte versionados contêm apenas o gerador e a documentação. Confira abaixo as limitações e os créditos antes de usar.
+
 ## Estado experimental
 
 A estrutura JSON e a integridade do ZIP gerado foram verificadas. A seleção de variantes, as animações, as armaduras e a preservação de jogadores/NPCs ainda precisam de validação visual no Minecraft. Há um relato de textura preta/roxa em alguns zumbis naturais; a entidade e a causa ainda não foram identificadas, nem foi confirmada relação com este patch. Não tratar esta versão como estável.
@@ -34,7 +42,7 @@ O script lê o JAR do Apocalypse Now e o ZIP do Reanimated em sua própria insta
 python scripts/build.py --apocalypse "C:\packs\apocalypsenow-3.0.5-forge-1.20.1.jar" --reanimated "C:\packs\Reanimated.zip"
 ```
 
-Saída: `dist/Lazarus - Apocalypse Reanimated Compat.zip`. Os modelos derivados e os arquivos originais não são versionados neste repositório. Cada colaborador gera o patch usando seus próprios arquivos.
+Saída: `dist/Lazarus - Apocalypse Reanimated Compat.zip`. Os modelos derivados e os arquivos originais não são versionados na árvore de código deste repositório. Para regenerar o patch, cada colaborador utiliza seus próprios arquivos.
 
 ## Instalar
 
@@ -61,4 +69,4 @@ Arquivos `.properties` selecionam a variante 2 apenas para os IDs de Walker, Run
 
 ## Créditos e arquivos de terceiros
 
-Os modelos e animações de origem pertencem ao autor do Reanimated Blue (mrblueyeti). Apocalypse Now, EMF, ETF e Tissou’s Zombie Pack pertencem aos respectivos autores. Este repositório contém o gerador e a documentação, sem incorporar os modelos de terceiros. A distribuição do ZIP gerado depende das permissões aplicáveis aos recursos de origem; nenhuma autorização de redistribuição foi verificada neste trabalho.
+Os modelos e animações de origem pertencem ao autor do Reanimated Blue (mrblueyeti). Apocalypse Now, EMF, ETF e Tissou’s Zombie Pack pertencem aos respectivos autores. A árvore de código contém o gerador e a documentação; o ZIP anexado à prévia contém modelos derivados do Reanimated. A distribuição desse ZIP depende das permissões aplicáveis aos recursos de origem; nenhuma autorização de redistribuição foi verificada neste trabalho. Este projeto não concede direitos sobre recursos de terceiros.
