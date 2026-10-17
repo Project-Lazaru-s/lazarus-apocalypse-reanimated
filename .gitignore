@@ -1,0 +1,7 @@
+/dist/
+__pycache__/
+*.pyc
+*.zip
+*.jar
+*.bak
+.env
