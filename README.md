@@ -1,72 +1,118 @@
+<p align="center">
+  <img src="docs/banner.png" alt="Lazarus Reanimated Compat: zumbis avançam por uma cidade abandonada" width="100%">
+</p>
+
+<p align="center">
+  <img alt="Minecraft 1.20.1" src="https://img.shields.io/badge/Minecraft-1.20.1-3c8527">
+  <img alt="Forge 47.x" src="https://img.shields.io/badge/Forge-47.x-dd7d2b">
+  <img alt="Resource pack" src="https://img.shields.io/badge/tipo-resource%20pack-6b5b3e">
+  <img alt="Versão 0.1.0 alpha" src="https://img.shields.io/badge/vers%C3%A3o-0.1.0--alpha.1-a45b35">
+</p>
+
 # Lazarus — Apocalypse Reanimated Compat
 
-Gerador de resource pack de compatibilidade para aplicar os modelos e animações do Reanimated Blue aos Walkers, Runners e Hordes do Apocalypse Now no Project Lazarus.
+**Lazarus — Apocalypse Reanimated Compat** é um resource pack experimental para o **Project Lazarus**. Seu objetivo é aplicar os modelos e as animações do **Reanimated Blue** aos Walkers, Runners e Hordes do **Apocalypse Now**, preservando as texturas das entidades.
 
-Este projeto é um **resource pack de compatibilidade**, acompanhado de um script Python para gerar o ZIP. Não é um mod Java/Forge independente.
+O projeto fornece um gerador em Python e a documentação para produzir o ZIP de compatibilidade. **Não é um mod Forge:** o arquivo gerado deve ser instalado em `resourcepacks`, não em `mods`.
 
-Consulte o [guia completo de uso e aplicação](GUIA-DE-USO.md) para gerar, instalar, ativar, testar e integrar o patch à distribuição do modpack.
+> A estrutura e a integridade do ZIP foram verificadas. Animações, seleção de variantes, armaduras e interação com outros packs ainda precisam de validação visual no Minecraft. Esta versão não deve ser considerada estável.
 
-## Baixar e usar como resource pack
+---
 
-Para jogadores: abra a [versão experimental v0.1.0-alpha.1](https://github.com/Project-Lazaru-s/lazarus-apocalypse-reanimated-compat/releases/tag/v0.1.0-alpha.1) e baixe o ZIP do patch em **Assets** (o GitHub pode trocar espaços por pontos no nome). Os arquivos **Source code** são o código deste repositório, não o resource pack.
+## Sumário
 
-Coloque o ZIP sem extrair na pasta `resourcepacks` da instância. Em **Opções → Pacotes de recursos**, ative-o acima do Reanimated Blue e do Tissou. Não é necessário Python para usar o ZIP pronto. Para desfazer, desative o pack.
+- [O que o pack cobre](#o-que-o-pack-cobre)
+- [Como funciona](#como-funciona)
+- [Instalação](#instalação)
+- [Gerar a partir do código](#gerar-a-partir-do-código)
+- [Estado dos testes](#estado-dos-testes)
+- [Créditos e distribuição](#créditos-e-distribuição)
 
-O anexo da prévia é o mesmo ZIP instalado inicialmente na instância local de teste. Os modelos derivados ficam nesse anexo; os arquivos-fonte versionados contêm apenas o gerador e a documentação. Confira abaixo as limitações e os créditos antes de usar.
+---
 
-## Estado experimental
+## O que o pack cobre
 
-A estrutura JSON e a integridade do ZIP gerado foram verificadas. A seleção de variantes, as animações, as armaduras e a preservação de jogadores/NPCs ainda precisam de validação visual no Minecraft. Há um relato de textura preta/roxa em alguns zumbis naturais; a entidade e a causa ainda não foram identificadas, nem foi confirmada relação com este patch. Não tratar esta versão como estável.
+| Família | IDs selecionados | Quantidade |
+|---|---|---:|
+| **Walkers** | `apocalypsenow:walker_1` a `walker_33` | 33 |
+| **Runners** | `apocalypsenow:runner_34` a `runner_57` | 24 |
+| **Hordes** | `apocalypsenow:horde_1` a `horde_5` | 5 |
 
-## Ambiente usado
+São **62 entidades** selecionadas. Crawlers ficam fora do escopo. O pack não traz texturas PNG próprias; a intenção é manter a aparência fornecida pelo Apocalypse Now e pelos demais recursos da instância.
 
-- Minecraft 1.20.1 / Forge.
-- Apocalypse Now 3.0.5.
-- Reanimated Blue v0.10.
-- Entity Model Features 3.3.11 e Entity Texture Features 7.2.5.
-- Tissou’s Zombie Pack 1.20.1 2.7 presente no modpack de teste.
+---
 
-O patch seleciona 33 Walkers, 24 Runners e 5 Hordes pelos IDs NBT. Os Crawlers estão fora do escopo, por decisão do projeto. As texturas próprias do Apocalypse Now são herdadas; o gerador não inclui PNGs.
+## Como funciona
 
-## Gerar localmente
+As entidades abrangidas usam camadas de modelo semelhantes às do jogador. O gerador lê os modelos de zumbi, armadura interna e armadura externa do Reanimated Blue e cria variantes para essas camadas. Regras `.properties` tentam selecionar a variante animada somente para os IDs da tabela. Outras entidades devem usar a variante padrão.
 
-Python 3.9 ou superior, sem dependências adicionais:
+O gerador lê os arquivos de origem da instalação local e **não altera** o JAR do Apocalypse Now nem o ZIP do Reanimated Blue. Os modelos derivados são incluídos apenas no ZIP gerado; os arquivos de terceiros não ficam versionados no código-fonte deste repositório.
+
+---
+
+## Instalação
+
+### Ambiente de referência
+
+| Componente | Versão usada |
+|---|---|
+| Minecraft / Forge | 1.20.1 / 47.x |
+| Apocalypse Now | 3.0.5 |
+| Reanimated Blue | v0.10 |
+| Entity Model Features (EMF) | 3.3.11 |
+| Entity Texture Features (ETF) | 7.2.5 |
+| Tissou’s Zombie Pack | 1.20.1 / 2.7, presente no modpack de teste |
+
+A compatibilidade com outras versões não foi verificada.
+
+### Para jogadores
+
+1. Obtenha o ZIP do patch na [versão experimental](https://github.com/Project-Lazaru-s/lazarus-apocalypse-reanimated-compat/releases/tag/v0.1.0-alpha.1). Baixe o arquivo em **Assets**; os arquivos **Source code** da página não são o resource pack.
+2. Copie o ZIP, sem extrair, para `resourcepacks` da instância do Lazarus.
+3. Em **Opções → Pacotes de recursos**, ative o patch **acima** do Reanimated Blue e do Tissou’s Zombie Pack.
+4. Aguarde o recarregamento e confira Walkers, Runners e Hordes em um mundo de teste.
+
+Para desativar, retire o patch da lista de pacotes selecionados. Não é necessário Python para usar o ZIP pronto.
+
+O [guia de uso](GUIA-DE-USO.md) traz o procedimento completo, comandos de teste e solução de problemas.
+
+---
+
+## Gerar a partir do código
+
+Use **Python 3.9 ou superior**. O script depende apenas da biblioteca padrão e lê, na sua própria instalação, o JAR do Apocalypse Now e o ZIP do Reanimated Blue.
 
 ```powershell
 python scripts/build.py --instance "C:\caminho\da\instancia"
 ```
 
-O script lê o JAR do Apocalypse Now e o ZIP do Reanimated em sua própria instalação, sem modificá-los. Caso existam várias versões, informe os arquivos explicitamente:
+Se houver múltiplas versões dos arquivos de origem, indique cada caminho:
 
 ```powershell
 python scripts/build.py --apocalypse "C:\packs\apocalypsenow-3.0.5-forge-1.20.1.jar" --reanimated "C:\packs\Reanimated.zip"
 ```
 
-Saída: `dist/Lazarus - Apocalypse Reanimated Compat.zip`. Os modelos derivados e os arquivos originais não são versionados na árvore de código deste repositório. Para regenerar o patch, cada colaborador utiliza seus próprios arquivos.
+O resultado padrão é `dist/Lazarus - Apocalypse Reanimated Compat.zip`. O gerador verifica os IDs esperados, a sintaxe JSON e a integridade do ZIP. Ele não instala nem ativa o pack automaticamente.
 
-## Instalar
+---
 
-1. Copie o ZIP gerado para `resourcepacks` da instância.
-2. Ative-o na tela de resource packs, com prioridade acima do Reanimated e do Tissou.
-3. Recarregue os recursos e confira o resultado em um mundo de teste.
+## Estado dos testes
 
-O gerador não instala o patch nem altera `options.txt`. Para desfazer a instalação, desative o pack.
+- **Verificado:** geração do ZIP, leitura dos modelos, sintaxe JSON e integridade do arquivo.
+- **Pendente no jogo:** animações e seleção de variantes; armaduras e itens nas mãos; aparência dos jogadores, NPCs e Crawlers; interação com Tissou, EMF e ETF.
+- **Relato em investigação:** alguns zumbis naturais apareceram com textura preta e roxa. A entidade, a causa e uma possível relação com este patch ainda não foram confirmadas.
 
-## Como funciona
+Para ajudar a identificar um defeito, compare **a mesma entidade** com o patch ativo e desativado e registre o ID, uma imagem e o trecho relevante de `logs/latest.log`.
 
-Os renderizadores humanoides analisados do Apocalypse Now usam as camadas de modelo e armadura de jogador. O gerador adapta os arquivos `zombie.jem`, `zombie_inner_armor.jem` e `zombie_outer_armor.jem` do Reanimated para variantes das camadas `player`, `player_inner_armor` e `player_outer_armor`.
+---
 
-Arquivos `.properties` selecionam a variante 2 apenas para os IDs de Walker, Runner e Horde. As outras entidades selecionam a variante 1, correspondente ao modelo padrão. Esse comportamento é a intenção da implementação e ainda requer teste no jogo.
+## Créditos e distribuição
 
-## Validação pendente
+- Projeto e gerador: **Kaique Melo**, para o **Project Lazarus**.
+- Modelos e animações de origem: **Reanimated Blue**, de **mrblueyeti**.
+- Apocalypse Now, EMF, ETF e Tissou’s Zombie Pack pertencem aos respectivos autores.
+- Banner: arte gerada com IA para este projeto.
 
-- Invocar `minecraft:zombie` repetidamente e verificar as variantes de textura.
-- Conferir `apocalypsenow:walker_1` até `walker_33`.
-- Conferir `apocalypsenow:runner_34` até `runner_57`.
-- Conferir `apocalypsenow:horde_1` até `horde_5`.
-- Conferir armaduras, itens nas mãos, jogador e NPCs.
-- Comparar o mesmo zumbi com defeito com o patch ativo e desativado.
+O ZIP gerado contém modelos derivados do Reanimated Blue. **A autorização para redistribuir esses recursos não foi verificada.** Confirme as permissões aplicáveis antes de publicar o ZIP ou incluí-lo em uma distribuição pública do modpack. Este repositório não concede direitos sobre arquivos de terceiros.
 
-## Créditos e arquivos de terceiros
-
-Os modelos e animações de origem pertencem ao autor do Reanimated Blue (mrblueyeti). Apocalypse Now, EMF, ETF e Tissou’s Zombie Pack pertencem aos respectivos autores. A árvore de código contém o gerador e a documentação; o ZIP anexado à prévia contém modelos derivados do Reanimated. A distribuição desse ZIP depende das permissões aplicáveis aos recursos de origem; nenhuma autorização de redistribuição foi verificada neste trabalho. Este projeto não concede direitos sobre recursos de terceiros.
+Este projeto não é afiliado à Mojang ou à Microsoft.
